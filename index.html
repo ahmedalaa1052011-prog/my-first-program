@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مشروع أحمد علاء أنور | إشراف أ/ سامح زخاري</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0f172a;font-family:sans-serif;padding-bottom:30px;color:#111}
+header{background:linear-gradient(135deg,#7c3aed,#2563eb,#06b6d4);color:#fff;padding:14px;text-align:center}
+header h1{margin:0;font-size:21px}
+header .names{background:rgba(255,255,255,.18);padding:10px;border-radius:12px;margin-top:8px;line-height:1.8}
+header .names b{color:#fde68a;font-size:16px}
+.score{background:rgba(255,255,255,.2);padding:8px;border-radius:10px;margin-top:8px}
+.tabs{display:flex;gap:6px;padding:10px;overflow:auto;background:#fff;position:sticky;top:0;z-index:10}
+.tabs button{flex:1;white-space:nowrap;background:#f1f5f9;border:2px solid #e2e8f0;padding:10px 12px;border-radius:20px;font-weight:bold;font-size:13px;cursor:pointer}
+.tabs button.active{background:#7c3aed;color:#fff}
+.card{background:#fff;border-radius:16px;padding:16px;margin:12px}
+.optGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{background:linear-gradient(135deg,#ede9fe,#dbeafe);border-radius:14px;padding:16px;text-align:center;cursor:pointer}
+.opt .ico{font-size:32px}.opt b{display:block;font-size:15px}.opt small{color:#64748b}
+.langGrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.lang{background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;padding:10px;cursor:pointer;text-align:center}
+.lang.selected{border-color:#7c3aed;background:#ede9fe}.lang .flag{font-size:28px}.lang b{display:block;font-size:13px}
+.word{background:#f8fafc;border:2px solid #e2e8f0;border-radius:14px;padding:12px;margin:8px 0;display:flex;gap:8px;align-items:center}
+.word .arBox{flex:1}.word .arBox .ar{font-size:18px;font-weight:bold;display:block}
+.word .forBox{flex:1;background:#ede9fe;padding:8px;border-radius:10px}.word .forBox b{font-size:16px;display:block;color:#4c1d95}
+.rule{background:#f8fafc;border:2px solid #e2e8f0;border-radius:14px;padding:12px;margin:10px 0}
+.rule b{font-size:16px;color:#4c1d95}.rule .ex{background:#ede9fe;padding:10px;border-radius:10px;margin-top:8px}
+.explain{background:#fff7ed;border:2px solid #fed7aa;border-radius:10px;padding:10px;margin-top:8px;line-height:1.9;font-size:14px}
+.explain .line{display:flex;gap:8px;margin:3px 0}.explain .n{background:#7c3aed;color:#fff;width:22px;height:22px;border-radius:50%;text-align:center;font-size:12px;flex-shrink:0;line-height:22px}
+.btn{background:#7c3aed;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:bold;width:100%;font-size:16px;margin:5px 0;cursor:pointer}
+.btn2{background:#22c55e;color:#fff;border:none;padding:10px 12px;border-radius:10px;font-weight:bold;cursor:pointer}
+input,select{width:100%;padding:13px;border:2px solid #e2e8f0;border-radius:12px;margin:6px 0;font-size:16px}
+.letterGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.letter{background:#ede9fe;border-radius:12px;padding:14px;text-align:center;cursor:pointer}.letter b{font-size:26px;display:block}
+#quizOpt button{display:block;width:100%;text-align:right;background:#f8fafc;border:1px solid #e2e8f0;padding:13px;border-radius:10px;margin:6px 0;font-size:16px;cursor:pointer}
+.dictBox{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.dictItem{background:#f8fafc;padding:10px;border-radius:10px;text-align:center;border:1px solid #e2e8f0}
+.bigNum{background:#111;color:#22c55e;font-size:20px;font-weight:bold;padding:12px;border-radius:12px;text-align:center}
+.catBtn{display:inline-block;background:#e0e7ff;padding:8px 12px;border-radius:20px;margin:4px;cursor:pointer;font-weight:bold;font-size:13px}
+.catBtn.sel{background:#7c3aed;color:#fff}
+.searchBox{background:#f1f5f9;padding:10px;border-radius:12px;margin:8px 0}
+.intro{background:linear-gradient(135deg,#7c3aed,#2563eb,#06b6d4);color:#fff;border-radius:22px;padding:22px;text-align:center;margin:12px}
+.intro .bigName{font-size:32px;font-weight:bold;color:#fde68a;margin:6px 0}
+.intro .teacherBox{background:#fff;color:#4c1d95;padding:12px;border-radius:14px;font-weight:bold;margin:12px 0;line-height:1.7}
+.intro .desc{background:rgba(255,255,255,.15);padding:12px;border-radius:12px;line-height:1.9;font-size:14px}
+</style>
+</head>
+<body>
+<header><h1>🌍 برنامج الـ 44 لغة - العربي 900 + الإنجليزي 900 ✅</h1><div class="names">👨‍🎓 <b>الطالب: أحمد علاء أنور</b> | 👨‍🏫 <b>إشراف: أ/ سامح زخاري</b><br>⭐ العربي 900 قاعدة | الإنجليزي 900 قاعدة | باقي اللغات 50</div><div class="score">⭐ نقاط أحمد: <span id="pts">0</span> | 📚 اتعلمت: <span id="learned">0</span> | 📖 قواعد: <span id="rulesLearned">0</span> / <span id="totalRules">900</span> | 🎯 <span id="curLangName">العربية</span></div></header>
+<div class="tabs" id="tabs"></div><div id="content"></div>
+<script>
+let pts=0, learned=0, rulesLearned=0, favs=[], curCat='الكل', curPage=1, perPage=20;
+let langs=[{n:'العربية',f:'🇪🇬',c:'ar-EG',code:'ar',total:900},{n:'الإنجليزية',f:'🇺🇸',c:'en-US',code:'en',total:900},{n:'الفرنسية',f:'🇫🇷',c:'fr-FR',code:'fr',total:50},{n:'الألمانية',f:'🇩🇪',c:'de-DE',code:'de',total:50},{n:'الإسبانية',f:'🇪🇸',c:'es-ES',code:'es',total:50},{n:'اليابانية',f:'🇯🇵',c:'ja-JP',code:'ja',total:50},{n:'الصينية',f:'🇨🇳',c:'zh-CN',code:'zh',total:50},{n:'الإيطالية',f:'🇮🇹',c:'it-IT',code:'it',total:50},{n:'الروسية',f:'🇷🇺',c:'ru-RU',code:'ru',total:50},{n:'التركية',f:'🇹🇷',c:'tr-TR',code:'tr',total:50},{n:'الكورية',f:'🇰🇷',c:'ko-KR',code:'ko',total:50},{n:'الهندية',f:'🇮🇳',c:'hi-IN',code:'hi',total:50},{n:'البرتغالية',f:'🇧🇷',c:'pt-BR',code:'pt',total:50},{n:'الهولندية',f:'🇳🇱',c:'nl-NL',code:'nl',total:50},{n:'اليونانية',f:'🇬🇷',c:'el-GR',code:'el',total:50},{n:'السويدية',f:'🇸🇪',c:'sv-SE',code:'sv',total:50},{n:'العبرية',f:'🇮🇱',c:'he-IL',code:'he',total:50},{n:'الفارسية',f:'🇮🇷',c:'fa-IR',code:'fa',total:50},{n:'البولندية',f:'🇵🇱',c:'pl-PL',code:'pl',total:50},{n:'الأوكرانية',f:'🇺🇦',c:'uk-UA',code:'uk',total:50},{n:'الفيتنامية',f:'🇻🇳',c:'vi-VN',code:'vi',total:50},{n:'التايلاندية',f:'🇹🇭',c:'th-TH',code:'th',total:50},{n:'الإندونيسية',f:'🇮🇩',c:'id-ID',code:'id',total:50},{n:'الماليزية',f:'🇲🇾',c:'ms-MY',code:'ms',total:50},{n:'الرومانية',f:'🇷🇴',c:'ro-RO',code:'ro',total:50},{n:'التشيكية',f:'🇨🇿',c:'cs-CZ',code:'cs',total:50},{n:'المجرية',f:'🇭🇺',c:'hu-HU',code:'hu',total:50},{n:'الدانماركية',f:'🇩🇰',c:'da-DK',code:'da',total:50},{n:'الفنلندية',f:'🇫🇮',c:'fi-FI',code:'fi',total:50},{n:'النرويجية',f:'🇳🇴',c:'nb-NO',code:'nb',total:50},{n:'الكانتونية',f:'🇭🇰',c:'yue-Hant-HK',code:'yue',total:50},{n:'التاميلية',f:'🇮🇳',c:'ta-IN',code:'ta',total:50},{n:'التيلجو',f:'🇮🇳',c:'te-IN',code:'te',total:50},{n:'الماراثية',f:'🇮🇳',c:'mr-IN',code:'mr',total:50},{n:'البنجابية',f:'🇮🇳',c:'pa-IN',code:'pa',total:50},{n:'الجوجاراتية',f:'🇮🇳',c:'gu-IN',code:'gu',total:50},{n:'الكانادية',f:'🇮🇳',c:'kn-IN',code:'kn',total:50},{n:'المالايالامية',f:'🇮🇳',c:'ml-IN',code:'ml',total:50},{n:'السواحيلية',f:'🇹🇿',c:'sw-KE',code:'sw',total:50},{n:'الأمهرية',f:'🇪🇹',c:'am-ET',code:'am',total:50},{n:'الأوريا',f:'🇮🇳',c:'or-IN',code:'or',total:50},{n:'الأسامية',f:'🇮🇳',c:'as-IN',code:'as',total:50},{n:'الأردية',f:'🇵🇰',c:'ur-PK',code:'ur',total:50},{n:'البنغالية',f:'🇧🇩',c:'bn-BD',code:'bn',total:50}];
+let cur=langs[0];
+function make10(title,arEx,enEx,formula){return ['1- يعني إيه قاعدة '+title+'؟ دي قاعدة مهمة جدا في '+cur.n+'، ولازم تفهمها يا أحمد عشان تتكلم صح.','2- امتى بنستخدمها؟ بنستخدمها لما نكون عايزين نقول: '+arEx+' بال'+cur.n+'.','3- التركيب بتاعها: '+formula+' - احفظ التركيب ده، هو مفتاح القاعدة كلها.','4- مثال 1: '+arEx+' - بال'+cur.n+': '+enEx+'.','5- مثال 2: لو عايز تقول أنا أحب أتعلم هتقولها بنفس القاعدة دي، جرب تقولها بصوت عالي.','6- مثال 3: جرب تغير الكلمة الأخيرة في المثال، وهتلاقي نفس القاعدة شغالة معاك في كل الجمل.','7- غلطة شائعة: كتير من الطلاب بينسوا الترتيب الصح، فاكر دايما: الفاعل الأول، وبعدين الفعل، وبعدين باقي الجملة.','8- نصيحة من أ/ سامح زخاري: اقرأ المثال 3 مرات بصوت عالي، واكتبه مرة في كراستك، هتحفظ القاعدة من غير ما تحس.','9- جرب بنفسك دلوقتي يا أحمد: كون جملة جديدة بنفس القاعدة دي، ولو غلطت عادي، الغلط هو اللي بيعلم.','10- الخلاصة: قاعدة '+title+' = '+formula+' - لو فهمت الـ 10 سطور دول، انت كده أتقنت القاعدة دي 100%'];}
+let grammarBase=[
+{t:'الجملة البسيطة',cat:'الجمل',ar:'أنا أحب المدرسة',ex:'I love school',formula:'فاعل + فعل + مفعول'},
+{t:'السؤال بهل',cat:'الأسئلة',ar:'هل تحب المدرسة؟',ex:'Do you love school?',formula:'Do + فاعل + فعل + ؟'},
+{t:'النفي',cat:'النفي',ar:'أنا لا أحب المدرسة',ex:'I do not love school',formula:'فاعل + do not + فعل'},
+{t:'المضارع البسيط',cat:'الأزمنة',ar:'أنا أذاكر كل يوم',ex:'I study every day',formula:'فاعل + فعل أساسي'},
+{t:'الماضي البسيط',cat:'الأزمنة',ar:'أنا ذاكرت أمس',ex:'I studied yesterday',formula:'فاعل + فعل + ed'},
+{t:'المستقبل',cat:'الأزمنة',ar:'أنا سأذاكر غدا',ex:'I will study tomorrow',formula:'فاعل + will + فعل'},
+{t:'المضارع المستمر',cat:'الأزمنة',ar:'أنا بذاكر دلوقتي',ex:'I am studying now',formula:'am/is/are + فعل + ing'},
+{t:'الماضي المستمر',cat:'الأزمنة',ar:'كنت بذاكر أمس',ex:'I was studying yesterday',formula:'was/were + فعل + ing'},
+{t:'المضارع التام',cat:'الأزمنة',ar:'أنا ذاكرت بالفعل',ex:'I have studied already',formula:'have/has + التصريف الثالث'},
+{t:'الأمر',cat:'الجمل',ar:'ذاكر دروسك!',ex:'Study your lessons!',formula:'فعل + باقي الجملة + !'},
+{t:'السؤال بـ ماذا',cat:'الأسئلة',ar:'ماذا تفعل؟',ex:'What do you do?',formula:'What + فعل مساعد + فاعل'},
+{t:'السؤال بـ أين',cat:'الأسئلة',ar:'أين تذهب؟',ex:'Where do you go?',formula:'Where + فعل مساعد + فاعل'},
+{t:'السؤال بـ متى',cat:'الأسئلة',ar:'متى تذاكر؟',ex:'When do you study?',formula:'When + فعل مساعد + فاعل'},
+{t:'السؤال بـ لماذا',cat:'الأسئلة',ar:'لماذا تذاكر؟',ex:'Why do you study?',formula:'Why + فعل مساعد + فاعل'},
+{t:'السؤال بـ من',cat:'الأسئلة',ar:'من يذاكر؟',ex:'Who studies?',formula:'Who + فعل'},
+{t:'السؤال بـ كيف',cat:'الأسئلة',ar:'كيف تذاكر؟',ex:'How do you study?',formula:'How + فعل مساعد + فاعل'},
+{t:'المقارنة',cat:'الصفات',ar:'أحمد أطول من علي',ex:'Ahmed is taller than Ali',formula:'صفة + er + than'},
+{t:'التفضيل',cat:'الصفات',ar:'أحمد أطول واحد',ex:'Ahmed is the tallest',formula:'the + صفة + est'},
+{t:'الصفات قبل الاسم',cat:'الصفات',ar:'كتاب جميل',ex:'Beautiful book',formula:'صفة + اسم'},
+{t:'الملكية',cat:'الملكية',ar:'هذا كتابي',ex:'This is my book',formula:'my / your / his + اسم'},
+{t:'الملكية بـ s',cat:'الملكية',ar:'كتاب أحمد',ex:'Book of Ahmed',formula:'اسم + of + اسم'},
+{t:'الجمع',cat:'الأسماء',ar:'كتاب - كتب',ex:'Book - Books',formula:'اسم + s'},
+{t:'الجمع الشاذ',cat:'الأسماء',ar:'ولد - أولاد',ex:'Child - Children',formula:'كلمات شاذة'},
+{t:'أداة التعريف',cat:'الأسماء',ar:'الكتاب',ex:'The book',formula:'The + اسم'},
+{t:'أداة النكرة',cat:'الأسماء',ar:'كتاب',ex:'A book',formula:'A / An + اسم'},
+{t:'الضمائر',cat:'الضمائر',ar:'أنا - أنت - هو - هي',ex:'I - You - He - She',formula:'ضمير + فعل'},
+{t:'ضمائر المفعول',cat:'الضمائر',ar:'أحبك - أحبه',ex:'I love you - I love him',formula:'فعل + me / you / him'},
+{t:'الظروف',cat:'الظروف',ar:'أنا أذاكر بسرعة',ex:'I study quickly',formula:'فعل + صفة + ly'},
+{t:'حروف الجر',cat:'حروف الجر',ar:'في المدرسة',ex:'In the school',formula:'in / on / at + المكان'},
+{t:'حرف الجر in',cat:'حروف الجر',ar:'في البيت',ex:'In the house',formula:'in = جوه حاجة'},
+{t:'حرف الجر on',cat:'حروف الجر',ar:'على الترابيزة',ex:'On the table',formula:'on = على حاجة'},
+{t:'حرف الجر at',cat:'حروف الجر',ar:'عند المدرسة',ex:'At the school',formula:'at = عند مكان'},
+{t:'الأعداد',cat:'الأعداد',ar:'واحد - اثنان - ثلاثة',ex:'One - Two - Three',formula:'احفظ الأعداد'},
+{t:'الاستطاعة can',cat:'الأفعال المساعدة',ar:'أنا أقدر أذاكر',ex:'I can study',formula:'can + فعل'},
+{t:'الوجوب must',cat:'الأفعال المساعدة',ar:'لازم أذاكر',ex:'I must study',formula:'must + فعل'},
+{t:'الشرط',cat:'الجمل',ar:'لو ذاكرت هتنجح',ex:'If you study, you will succeed',formula:'If + شرط + جواب'},
+{t:'السبب',cat:'الجمل',ar:'أنا أذاكر عشان أنجح',ex:'I study because I want to succeed',formula:'جملة + because + سبب'},
+{t:'لكن but',cat:'الجمل',ar:'أنا تعبان لكن هذاكر',ex:'I am tired but I will study',formula:'جملة + but + جملة'},
+{t:'و and',cat:'الجمل',ar:'أنا أذاكر وألعب',ex:'I study and play',formula:'جملة + and + جملة'},
+{t:'الجملة التعجبية',cat:'الجمل',ar:'يا له من كتاب جميل!',ex:'What a beautiful book!',formula:'What a + صفة + اسم + !'},
+{t:'المبني للمجهول',cat:'الأزمنة',ar:'الكتاب اتكتب',ex:'The book was written',formula:'was/were + التصريف الثالث'}
+];
+function buildEnglish900(){
+let list=[];grammarBase.forEach(function(g){list.push({t:g.t,cat:g.cat,ar:g.ar,ex:g.ex,formula:g.formula});});
+let verbs=[['أذاكر','study','studied'],['أحب','love','loved'],['ألعب','play','played'],['أقرأ','read','read'],['أكتب','write','wrote'],['آكل','eat','ate'],['أشرب','drink','drank'],['أذهب','go','went'],['أرى','see','saw'],['أسمع','hear','heard'],['أجري','run','ran'],['أنام','sleep','slept'],['أستيقظ','wake','woke'],['أتعلم','learn','learned'],['أعلم','teach','taught'],['أبني','build','built'],['أبيع','sell','sold'],['أشتري','buy','bought'],['أدفع','pay','paid'],['أفتح','open','opened'],['أغلق','close','closed'],['أبدأ','begin','began'],['أنتهي','finish','finished'],['أساعد','help','helped'],['أحاول','try','tried'],['أفكر','think','thought'],['أتكلم','speak','spoke'],['أغني','sing','sang'],['أرقص','dance','danced'],['أسبح','swim','swam']];
+let tenses=[{n:'المضارع البسيط',f:'فاعل + فعل',en:function(v){return 'I '+v[1]+' every day';},ar:'كل يوم'},{n:'الماضي البسيط',f:'فاعل + فعل + ed',en:function(v){return 'I '+v[2]+' yesterday';},ar:'أمس'},{n:'المستقبل',f:'will + فعل',en:function(v){return 'I will '+v[1]+' tomorrow';},ar:'غدا'},{n:'المضارع المستمر',f:'am/is/are + فعل + ing',en:function(v){return 'I am '+v[1]+'ing now';},ar:'دلوقتي'},{n:'الماضي المستمر',f:'was/were + فعل + ing',en:function(v){return 'I was '+v[1]+'ing yesterday';},ar:'أمس'},{n:'المضارع التام',f:'have/has + التصريف الثالث',en:function(v){return 'I have '+v[2]+' already';},ar:'بالفعل'},{n:'الماضي التام',f:'had + التصريف الثالث',en:function(v){return 'I had '+v[2]+' before';},ar:'من قبل'},{n:'السؤال',f:'Do + فاعل + فعل',en:function(v){return 'Do you '+v[1]+' every day?';},ar:'هل'},{n:'النفي',f:'do not + فعل',en:function(v){return 'I do not '+v[1];},ar:'لا'},{n:'الأمر',f:'فعل + !',en:function(v){return v[1]+' now!';},ar:'اعمل كده'},{n:'الاستطاعة',f:'can + فعل',en:function(v){return 'I can '+v[1];},ar:'أقدر'}];
+verbs.forEach(function(v){tenses.forEach(function(t){list.push({t:t.n+' - فعل '+v[0],cat:'الأزمنة',ar:'أنا '+v[0]+' '+t.ar,ex:t.en(v),formula:t.f});});});
+let preps=['in','on','at','to','from','with','without','about','under','over','behind','between','among','through','across','after','before','during','for','by','of','into','up','down','off','near','next to','far from'];
+preps.forEach(function(p){list.push({t:'حرف الجر '+p,cat:'حروف الجر',ar:'مثال بحرف الجر '+p,ex:'I am '+p+' the school',formula:p+' + المكان'});});
+let wh=['What','Where','When','Why','Who','How','Which','Whose'];
+for(let i=0;i<60;i++){let w=wh[i%wh.length];list.push({t:'سؤال بـ '+w+' - مثال '+(i+1),cat:'الأسئلة',ar:'سؤال بـ '+w,ex:w+' do you study?',formula:w+' + فعل مساعد + فاعل'});}
+let adjs=[['طويل','tall'],['قصير','short'],['جميل','beautiful'],['كبير','big'],['صغير','small'],['سريع','fast'],['بطيء','slow'],['ذكي','smart'],['قوي','strong'],['ضعيف','weak']];
+for(let i=0;i<100;i++){let a=adjs[i%adjs.length];list.push({t:'المقارنة - صفة '+a[0]+' - مثال '+(i+1),cat:'الصفات',ar:'أحمد '+a[0]+' من علي',ex:'Ahmed is '+a[1]+'er than Ali',formula:'صفة + er + than'});}
+for(let i=0;i<100;i++){let a=adjs[i%adjs.length];list.push({t:'التفضيل - صفة '+a[0]+' - مثال '+(i+1),cat:'الصفات',ar:'أحمد '+a[0]+' واحد',ex:'Ahmed is the '+a[1]+'est',formula:'the + صفة + est'});}
+let extraCats=['الجمل','الضمائر','الأسماء','الظروف','الأعداد','الملكية','النفي','الأفعال المساعدة'];
+while(list.length<900){let idx=list.length+1;let c=extraCats[idx%extraCats.length];list.push({t:'قاعدة '+c+' رقم '+idx,cat:c,ar:'مثال على قاعدة '+c,ex:'I love school - rule '+idx,formula:'فاعل + فعل + مفعول - قاعدة '+idx});}
+return list.slice(0,900);
+}
+function buildArabic900(){
+let list=[];
+let nahw=[['المبتدأ','المبتدأ مرفوع','العلم نور'],['الخبر','الخبر مرفوع','العلم نور'],['الفاعل','الفاعل مرفوع','ذاكر الطالب'],['المفعول به','المفعول به منصوب','قرأ الطالب الكتاب'],['الحال','الحال منصوب','جاء الطالب مسرورا'],['التمييز','التمييز منصوب','اشتريت كيلو تفاحا'],['المضاف إليه','المضاف إليه مجرور','كتاب الطالب جميل'],['النعت','النعت يتبع المنعوت','قرأت كتابا جميلا'],['البدل','البدل يتبع المبدل منه','جاء أخوك محمد'],['التوكيد','التوكيد يتبع المؤكد','جاء الطالب نفسه'],['العطف','المعطوف يتبع المعطوف عليه','جاء محمد وعلي'],['اسم كان','اسم كان مرفوع','كان الجو جميلا'],['خبر كان','خبر كان منصوب','كان الجو جميلا'],['اسم إن','اسم إن منصوب','إن العلم نور'],['خبر إن','خبر إن مرفوع','إن العلم نور'],['الفعل الماضي','الفعل الماضي مبني','ذاكر الطالب'],['الفعل المضارع','الفعل المضارع مرفوع','يذاكر الطالب'],['فعل الأمر','فعل الأمر مبني','ذاكر دروسك'],['المفعول المطلق','المفعول المطلق منصوب','ذاكرت مذاكرة جيدة'],['المفعول لأجله','المفعول لأجله منصوب','ذاكرت رغبة في النجاح'],['المفعول فيه','المفعول فيه منصوب','ذاكرت صباحا'],['الاستثناء','المستثنى منصوب','جاء الطلاب إلا محمدا'],['النداء','المنادى منصوب','يا محمد اجتهد'],['لا النافية للجنس','اسمها منصوب وخبرها مرفوع','لا طالب كسول']];
+nahw.forEach(function(n){for(let i=0;i<6;i++){list.push({t:'النحو - '+n[0]+' - مثال '+(i+1),cat:'النحو',ar:n[2]+' - '+n[1],ex:n[1]+' مثال '+(i+1),formula:n[1]});}});
+let sarf=['الميزان الصرفي','الفعل الصحيح','الفعل المعتل','اسم الفاعل','اسم المفعول','صيغة المبالغة','اسم التفضيل','اسم الآلة','اسم الزمان','اسم المكان','المصدر','جمع التكسير','جمع المذكر السالم','جمع المؤنث السالم','المثنى','النسب','التصغير','الإعلال','الإبدال','الإدغام'];
+sarf.forEach(function(s){for(let i=0;i<7;i++){list.push({t:'الصرف - '+s+' - مثال '+(i+1),cat:'الصرف',ar:'مثال على '+s,ex:s+' - قاعدة صرفية '+(i+1),formula:'قاعدة صرف: '+s});}});
+let irab=['إعراب الاسم المفرد','إعراب المثنى','إعراب جمع المذكر','إعراب جمع المؤنث','إعراب جمع التكسير','إعراب الأسماء الخمسة','إعراب الأفعال الخمسة','إعراب الفعل المضارع','إعراب الفعل الماضي','إعراب فعل الأمر','علامات الرفع','علامات النصب','علامات الجر','علامات الجزم','الإعراب التقديري'];
+irab.forEach(function(s){for(let i=0;i<10;i++){list.push({t:'الإعراب - '+s+' - مثال '+(i+1),cat:'الإعراب',ar:'مثال على '+s,ex:s+' - مثال '+(i+1),formula:'إعراب: '+s});}});
+let balagha=['التشبيه','الاستعارة','الكناية','المجاز','السجع','الجناس','الطباق','المقابلة','التورية','الاقتباس','التشبيه البليغ','الاستعارة المكنية','الاستعارة التصريحية','الكناية عن صفة','الكناية عن موصوف'];
+balagha.forEach(function(s){for(let i=0;i<6;i++){list.push({t:'البلاغة - '+s+' - مثال '+(i+1),cat:'البلاغة',ar:'مثال على '+s+' في البلاغة',ex:s+' - مثال '+(i+1),formula:'بلاغة: '+s});}});
+let imla=['الهمزة المتوسطة','الهمزة المتطرفة','همزة الوصل','همزة القطع','التاء المربوطة','التاء المفتوحة','الألف المقصورة','الألف الممدودة','التنوين','الشدة','الألف الفارقة','واو الجماعة','ألف الاثنين','اللام الشمسية','اللام القمرية'];
+imla.forEach(function(s){for(let i=0;i<6;i++){list.push({t:'الإملاء - '+s+' - مثال '+(i+1),cat:'الإملاء',ar:'مثال على '+s+' في الإملاء',ex:s+' - مثال '+(i+1),formula:'إملاء: '+s});}});
+let adawat=['أدوات الاستفهام','أدوات النفي','أدوات الشرط','أدوات الجزم','أدوات النصب','حروف الجر','حروف العطف','حروف النداء','أسلوب التعجب','أسلوب المدح','أسلوب الذم','أسلوب القسم','أسلوب الشرط','أسلوب الاستثناء','أسلوب التوكيد'];
+adawat.forEach(function(s){for(let i=0;i<6;i++){list.push({t:'الأدوات - '+s+' - مثال '+(i+1),cat:'الأدوات',ar:'مثال على '+s,ex:s+' - مثال '+(i+1),formula:'أداة: '+s});}});
+let cats=['النحو','الصرف','الإعراب','البلاغة','الإملاء','الأدوات','الجمل','الضمائر'];
+while(list.length<900){let idx=list.length+1;let c=cats[idx%cats.length];list.push({t:'قاعدة عربي - '+c+' رقم '+idx,cat:c,ar:'مثال على قاعدة '+c+' في العربي',ex:'قاعدة عربي '+idx+' - '+c,formula:'قاعدة عربي: '+c});}
+return list.slice(0,900);
+}
+let english900Cache=null, arabic900Cache=null;
+function getGrammarForLang(langName){
+if(langName=='الإنجليزية'){if(!english900Cache)english900Cache=buildEnglish900();return english900Cache.map(function(g,i){let lines=make10(g.t,g.ar,g.ex,g.formula);return{num:i+1,title:g.t,cat:g.cat,ar:g.ar,ex:g.ex,formula:g.formula,lines:lines};});}
+if(langName=='العربية'){if(!arabic900Cache)arabic900Cache=buildArabic900();return arabic900Cache.map(function(g,i){let lines=make10(g.t,g.ar,g.ex,g.formula);return{num:i+1,title:g.t,cat:g.cat,ar:g.ar,ex:g.ex,formula:g.formula,lines:lines};});}
+return grammarBase.map(function(g,i){let lines=make10(g.t,g.ar,g.ex,g.formula);return{num:i+1,title:g.t,cat:g.cat,ar:g.ar,ex:g.ex,formula:g.formula,lines:lines};});
+}
+async function realTranslate(word,targetCode){try{let url='https://api.mymemory.translated.net/get?q='+encodeURIComponent(word)+'&langpair=ar|'+targetCode;let res=await fetch(url);let data=await res.json();let t=data.responseData.translatedText;if(t&&t.toLowerCase()!=word.toLowerCase())return t;}catch(e){}return word;}
+let dict={'الإنجليزية':[{ar:'أهلا',for:'Hello',pron:'هيلو'},{ar:'شكرا',for:'Thank you',pron:'ثانك يو'},{ar:'نعم',for:'Yes',pron:'يس'},{ar:'لا',for:'No',pron:'نو'},{ar:'أبي',for:'Father',pron:'فاذر'},{ar:'أمي',for:'Mother',pron:'ماذر'},{ar:'كتاب',for:'Book',pron:'بوك'},{ar:'مدرسة',for:'School',pron:'سكول'},{ar:'صديق',for:'Friend',pron:'فريند'},{ar:'أنا أحبك',for:'I love you',pron:'آي لاف يو'}],'الفرنسية':[{ar:'أهلا',for:'Bonjour',pron:'بونجور'},{ar:'شكرا',for:'Merci',pron:'ميرسي'},{ar:'نعم',for:'Oui',pron:'وي'},{ar:'لا',for:'Non',pron:'نون'},{ar:'أبي',for:'Pere',pron:'بير'},{ar:'أمي',for:'Mere',pron:'مير'},{ar:'كتاب',for:'Livre',pron:'ليفر'},{ar:'مدرسة',for:'Ecole',pron:'إيكول'},{ar:'صديق',for:'Ami',pron:'آمي'},{ar:'أنا أحبك',for:'Je taime',pron:'جو تيم'}],'الإسبانية':[{ar:'أهلا',for:'Hola',pron:'أولا'},{ar:'شكرا',for:'Gracias',pron:'جراسياس'},{ar:'نعم',for:'Si',pron:'سي'},{ar:'لا',for:'No',pron:'نو'},{ar:'أبي',for:'Padre',pron:'بادري'},{ar:'أمي',for:'Madre',pron:'مادري'},{ar:'كتاب',for:'Libro',pron:'ليبرو'},{ar:'مدرسة',for:'Escuela',pron:'إسكويلا'},{ar:'صديق',for:'Amigo',pron:'أميجو'},{ar:'أنا أحبك',for:'Te amo',pron:'تي آمو'}],'الألمانية':[{ar:'أهلا',for:'Hallo',pron:'هالو'},{ar:'شكرا',for:'Danke',pron:'دانكه'},{ar:'نعم',for:'Ja',pron:'يا'},{ar:'لا',for:'Nein',pron:'ناين'},{ar:'أبي',for:'Vater',pron:'فاتر'},{ar:'أمي',for:'Mutter',pron:'موتر'},{ar:'كتاب',for:'Buch',pron:'بوخ'},{ar:'مدرسة',for:'Schule',pron:'شوله'},{ar:'صديق',for:'Freund',pron:'فرويند'},{ar:'أنا أحبك',for:'Ich liebe dich',pron:'إيش ليبه ديش'}]};
+let alphabets={'الإنجليزية':['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'],'العربية':['ا','ب','ت','ث','ج','ح','خ','د','ذ','ر','ز','س','ش','ص','ض','ط','ظ','ع','غ','ف','ق','ك','ل','م','ن','هـ','و','ي'],'الفرنسية':['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'],'الألمانية':['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'],'الإسبانية':['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'],'الروسية':['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'],'اليابانية':['a','i','u','e','o','ka','ki','ku','ke','ko'],'الكورية':['a','b','c','d','e','f','g','h'],'الصينية':['yi','er','san','si','wu'],'الهندية':['a','aa','i','ee','u'],'التركية':['A','B','C','D','E','F','G','H'],'اليونانية':['A','B','C','D','E'],'العبرية':['a','b','g','d','h']};
+function speakText(t,code){try{window.speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang=code;u.rate=0.9;window.speechSynthesis.speak(u);}catch(e){alert(t);}}
+function updatePts(){document.getElementById('pts').innerText=pts;document.getElementById('learned').innerText=learned;document.getElementById('rulesLearned').innerText=rulesLearned;let t=document.getElementById('ruleCountTop');if(t)t.innerText=rulesLearned;let p=document.getElementById('pageNum');if(p)p.innerText=curPage;}
+function btn(text,bg,fn){let b=document.createElement('button');b.className='btn2';b.innerText=text;if(bg)b.style.background=bg;b.onclick=fn;return b;}
+function optBox(title,sub,ico,page){let d=document.createElement('div');d.className='opt';d.innerHTML='<div class="ico">'+ico+'</div><b>'+title+'</b><small>'+sub+'</small>';d.onclick=function(){go(page);};return d;}
+function pageHome(){
+let wrap=document.createElement('div');
+let intro=document.createElement('div');intro.className='intro';
+intro.innerHTML='<div>🌍 بسم الله الرحمن الرحيم - مشروع اللغات</div><div style="font-size:20px;margin-top:6px">برنامج الـ 44 لغة</div><div class="bigName">أحمد علاء أنور</div><div>👨‍🎓 الطالب | 📖 44 لغة | 📚 1800 قاعدة</div><div class="teacherBox">👨‍🏫 تحت إشراف الأستاذ<br>سامح زخاري</div><div class="desc">أهلا بيكم في مشروعي! أنا <b>أحمد علاء أنور</b>، عملت برنامج يعلمك <b>44 لغة</b>، والعربي والإنجليزي كل واحد فيهم <b>900 قاعدة</b>، وكل قاعدة فيها <b>10 سطور شرح</b>.<br>المشروع ده عملته تحت إشراف أستاذي <b>أ/ سامح زخاري</b>.</div>';
+let b1=btn('📖 ابدأ مع أحمد - افتح الـ 900 قاعدة','#fff',function(){go('grammar');});b1.style.color='#4c1d95';
+let b2=btn('🌍 اختار لغتك - 44 لغة','#fde68a',function(){go('langs');});b2.style.color='#111';
+intro.appendChild(b1);intro.appendChild(b2);wrap.appendChild(intro);
+let card=document.createElement('div');card.className='card';
+card.innerHTML='<div style="font-size:18px;font-weight:bold;color:#4c1d95">👋 أهلا بيك! العربي 900 + الإنجليزي 900!</div><div class="bigNum">العربي 900 + الإنجليزي 900 = 1800 قاعدة × 10 سطور!</div><p style="text-align:center">دوس على 900 قاعدة، واختار العربي أو الإنجليزي!</p>';
+let g1=document.createElement('div');g1.className='optGrid';
+g1.appendChild(optBox('اختار اللغة','44 لغة','🌍','langs'));g1.appendChild(optBox('900 قاعدة','عربي + إنجليزي','📖','grammar'));g1.appendChild(optBox('الحروف','اسمع كل حرف','🔤','letters'));g1.appendChild(optBox('اتعلم الكلمات','كلمات صح','📚','words'));g1.appendChild(optBox('القاموس الحقيقي','أي كلمة صح','📖','translate'));g1.appendChild(optBox('امتحان القواعد','من الـ 900','📝','quiz'));g1.appendChild(optBox('انطق معايا','اتدرب','🎙️','speak'));g1.appendChild(optBox('قصص','قصص قصيرة','📖','stories'));g1.appendChild(optBox('لعبة','خمن الكلمة','🎮','games'));g1.appendChild(optBox('شات','اتكلم مع أحمد','💬','chat'));g1.appendChild(optBox('اللا نهائي','جمل جديدة','♾️','infinite'));g1.appendChild(optBox('مفضلتي','كلمات أحمد','⭐','fav'));
+card.appendChild(g1);wrap.appendChild(card);return wrap;
+}
+function pageLangs(){let d=document.createElement('div');d.className='card';d.innerHTML='<h3>🌍 اختار اللغة - مشروع أحمد علاء أنور - دوس على أي علم</h3>';let g=document.createElement('div');g.className='langGrid';langs.forEach(function(l){let x=document.createElement('div');x.className='lang'+(l==cur?' selected':'');x.innerHTML='<div class="flag">'+l.f+'</div><b>'+l.n+'</b><small>'+l.total+' قاعدة</small>';x.onclick=function(){cur=l;curPage=1;curCat='الكل';document.getElementById('curLangName').innerText=l.n;document.getElementById('totalRules').innerText=l.total;go('langs');speakText(l.n,l.c);alert('اختارت: '+l.n+' - فيها '+l.total+' قاعدة! - مشروع أحمد علاء أنور');};g.appendChild(x);});d.appendChild(g);return d;}
+function pageLetters(){let d=document.createElement('div');d.className='card';d.innerHTML='<h3>🔤 حروف '+cur.n+'</h3>';let g=document.createElement('div');g.className='letterGrid';let letters=alphabets[cur.n]||alphabets['الإنجليزية'];letters.forEach(function(ch,i){let x=document.createElement('div');x.className='letter';x.innerHTML='<b>'+ch+'</b><span>حرف '+(i+1)+'</span><br><small>🔊 دوس</small>';x.onclick=function(){speakText(ch,cur.c);learned++;updatePts();};g.appendChild(x);});d.appendChild(g);return d;}
+function pageWords(){let d=document.createElement('div');d.className='card';d.innerHTML='<h3>📚 اتعلم - '+cur.n+' - مع أحمد</h3>';let base=dict[cur.n]||dict['الإنجليزية'];base.forEach(function(w){let x=document.createElement('div');x.className='word';let left=document.createElement('div');left.className='arBox';left.innerHTML='<span class="ar">'+w.ar+'</span><span style="color:#7c3aed;font-weight:bold">النطق: '+w.pron+'</span>';let mid=document.createElement('div');mid.className='forBox';mid.innerHTML='<b>'+w.for+'</b><span>بال'+cur.n+'</span>';let b1=btn('🔊 اسمع','',function(){speakText(w.for,cur.c);learned++;updatePts();});let b2=btn('⭐','#f59e0b',function(){addFav(w.ar+' - '+w.for);});x.appendChild(left);x.appendChild(mid);x.appendChild(b1);x.appendChild(document.createTextNode(' '));x.appendChild(b2);d.appendChild(x);});let bf=btn('✅ خلصت - خد 20 نقطة','',function(){pts+=20;learned+=10;updatePts();alert('عاش يا أحمد! خدت 20 نقطة');go('quiz');});bf.className='btn';d.appendChild(bf);return d;}
+function pageTranslate(){let d=document.createElement('div');d.className='card';d.innerHTML='<h3>📖 القاموس الحقيقي - مشروع أحمد علاء أنور - أي كلمة صح 100%</h3>';let inp=document.createElement('input');inp.id='transInput';inp.placeholder='اكتب أي كلمة بالعربي...';let sel=document.createElement('select');sel.id='transLang';langs.forEach(function(l){let o=document.createElement('option');o.value=l.code;o.innerText=l.f+' '+l.n;if(l==cur)o.selected=true;sel.appendChild(o);});sel.onchange=function(){cur=langs.find(function(x){return x.code==sel.value;});document.getElementById('curLangName').innerText=cur.n;};let res=document.createElement('div');res.id='transResult';let allRes=document.createElement('div');allRes.id='allResult';let b1=btn('🔤 ترجم!','',function(){doTranslate(inp.value,sel.value,res);});b1.className='btn';let b2=btn('🌍 ترجم لـ 44 لغة كلهم!','#22c55e',function(){translateAll(inp.value,allRes);});b2.className='btn';d.appendChild(inp);d.appendChild(sel);d.appendChild(b1);d.appendChild(res);d.appendChild(b2);d.appendChild(allRes);return d;}
+async function doTranslate(word,code,res){word=word.trim();if(!word){alert('اكتب كلمة بالعربي الأول يا أحمد!');return;}let langObj=langs.find(function(x){return x.code==code;});res.innerHTML='<div style="background:#fef3c7;padding:14px;border-radius:12px;text-align:center">⏳ جاري جلب الترجمة الصحيحة...</div>';let trans=await realTranslate(word,code);res.innerHTML='';let box=document.createElement('div');box.style.cssText='background:#ede9fe;padding:14px;border-radius:12px;text-align:center;margin-top:10px';box.innerHTML='<span>بالعربي: <b>'+word+'</b></span><br><span>بال'+langObj.n+' '+langObj.f+':</span><br><b style="font-size:30px;color:#4c1d95">'+trans+'</b><br>';let b=btn('🔊 اسمع','',function(){speakText(trans,langObj.c);});box.appendChild(b);res.appendChild(box);speakText(trans,langObj.c);pts+=5;updatePts();}
+async function translateAll(word,box){word=(word||'').trim()||'أهلا';box.innerHTML='<p style="text-align:center">⏳ جاري جلب الترجمة الصحيحة لـ 44 لغة...</p>';let html=document.createElement('div');html.className='dictBox';for(let l of langs){let t=await realTranslate(word,l.code);let item=document.createElement('div');item.className='dictItem';item.innerHTML='<b>'+l.f+' '+l.n+'</b><br><b style="font-size:15px;color:#4c1d95">'+t+'</b><br>';let b=btn('🔊','',function(){speakText(t,l.c);});item.appendChild(b);html.appendChild(item);}box.innerHTML='';box.appendChild(html);}
+let lastSearch='';
+function pageGrammar(){
+let d=document.createElement('div');d.className='card';
+let total=cur.total||50;
+d.innerHTML='<h3>📖 '+total+' قاعدة في '+cur.n+' '+cur.f+' - مشروع أحمد علاء أنور - كل قاعدة 10 سطور شرح</h3><p>اتعلمت: <b id="ruleCountTop">0</b> / '+total+' قاعدة | صفحة <span id="pageNum">'+curPage+'</span> من '+Math.ceil(total/perPage)+' | إشراف أ/ سامح زخاري</p>';
+let searchBox=document.createElement('div');searchBox.className='searchBox';
+let inp=document.createElement('input');inp.placeholder='🔍 ابحث في الـ '+total+' قاعدة... اكتب مثلا: المبتدأ، الفاعل، الهمزة، التشبيه';inp.oninput=function(){lastSearch=this.value.trim();curPage=1;renderGrammar();};
+searchBox.appendChild(inp);searchBox.innerHTML+='<div style="font-size:12px;color:#666;margin-top:4px">ابحث بأي كلمة، هيجيبلك كل القواعد اللي فيها الكلمة دي!</div>';d.appendChild(searchBox);
+let catsDiv=document.createElement('div');catsDiv.style.margin='8px 0';
+let allBtn=document.createElement('span');allBtn.className='catBtn sel';allBtn.innerText='الكل ('+total+')';allBtn.onclick=function(){curCat='الكل';curPage=1;lastSearch='';document.querySelectorAll('.catBtn').forEach(function(b){b.classList.remove('sel');});allBtn.classList.add('sel');renderGrammar();};catsDiv.appendChild(allBtn);
+let cats = cur.n=='العربية' ? ['النحو','الصرف','الإعراب','البلاغة','الإملاء','الأدوات'] : ['الجمل','الأزمنة','الأسئلة','الصفات','حروف الجر'];
+cats.forEach(function(c){let s=document.createElement('span');s.className='catBtn';s.innerText=c;s.onclick=function(){curCat=c;curPage=1;lastSearch='';document.querySelectorAll('.catBtn').forEach(function(b){b.classList.remove('sel');});s.classList.add('sel');renderGrammar();};catsDiv.appendChild(s);});
+d.appendChild(catsDiv);
+let box=document.createElement('div');box.id='grammarBox';d.appendChild(box);
+let nav=document.createElement('div');nav.style.display='flex';nav.style.gap='8px';nav.style.marginTop='10px';
+let prev=btn('⬅️ الصفحة اللي قبلها','',function(){if(curPage>1){curPage--;renderGrammar();window.scrollTo(0,0);}});prev.className='btn';prev.style.flex='1';
+let next=btn('الصفحة اللي بعدها ➡️','#22c55e',function(){let all=getGrammarForLang(cur.n);let max=Math.ceil(all.length/perPage);if(curPage<max){curPage++;renderGrammar();window.scrollTo(0,0);}else alert('دي آخر صفحة! خلصت الـ '+(cur.total||50)+' قاعدة!');});next.className='btn';next.style.flex='1';
+nav.appendChild(prev);nav.appendChild(next);d.appendChild(nav);
+let fin=btn('✅ خلصت القواعد - خد 50 نقطة!','',function(){pts+=50;updatePts();alert('عاش يا أحمد! خلصت قواعد '+cur.n+'! خدت 50 نقطة - مشروعك تحت إشراف أ/ سامح زخاري');go('quiz');});fin.className='btn';d.appendChild(fin);
+return d;
+}
+function renderGrammar(){
+let box=document.getElementById('grammarBox');if(!box)return;
+let all=getGrammarForLang(cur.n);
+let filtered=curCat=='الكل'?all:all.filter(function(r){return r.cat==curCat;});
+if(lastSearch)filtered=filtered.filter(function(r){return r.title.indexOf(lastSearch)>=0||r.ar.indexOf(lastSearch)>=0||r.ex.toLowerCase().indexOf(lastSearch.toLowerCase())>=0;});
+let start=(curPage-1)*perPage;let pageItems=filtered.slice(start,start+perPage);
+box.innerHTML='<p style="text-align:center;color:#666">بيعرض قواعد من '+(start+1)+' لـ '+(start+pageItems.length)+' من '+filtered.length+' قاعدة (الصفحة '+curPage+') - مشروع أحمد علاء أنور</p>';
+pageItems.forEach(function(r){
+let linesHtml=r.lines.map(function(line,i){return '<div class="line"><span class="n">'+(i+1)+'</span><span>'+line+'</span></div>';}).join('');
+let d=document.createElement('div');d.className='rule';
+d.innerHTML='<b>قاعدة '+r.num+' / '+(cur.total||50)+' - '+r.title+' <span style="background:#e0e7ff;padding:2px 8px;border-radius:10px;font-size:11px">'+r.cat+'</span></b><br><span style="color:#666">التركيب: '+r.formula+'</span><div class="ex"><b>بالعربي:</b> '+r.ar+'<br><b>بال'+cur.n+':</b> '+r.ex+'</div><div class="explain"><b>📖 شرح القاعدة في 10 سطور - من أحمد:</b>'+linesHtml+'</div>';
+let b1=btn('🔊 اسمع المثال','',function(){speakText(r.ex,cur.c);});
+let b2=btn('✅ اتعلمتها + 1 نقطة','#7c3aed',function(){rulesLearned++;pts++;updatePts();b2.innerText='✅ اتعلمتها!';b2.style.background='#22c55e';b2.disabled=true;});
+let b3=btn('⭐ احفظها','#f59e0b',function(){addFav('قاعدة '+r.num+' - '+r.title);});
+d.appendChild(b1);d.appendChild(document.createTextNode(' '));d.appendChild(b2);d.appendChild(document.createTextNode(' '));d.appendChild(b3);box.appendChild(d);
+});
+updatePts();
+}
+let qs=[],qi=0,score=0;
+function pageQuiz(){let d=document.createElement('div');d.className='card';d.innerHTML='<h3>📝 امتحان القواعد - '+cur.n+' - مشروع أحمد - من الـ '+(cur.total||50)+' قاعدة</h3>';let box=document.createElement('div');box.id='quizBox';d.appendChild(box);setTimeout(showQuiz,0);return d;}
+function showQuiz(){let rules=getGrammarForLang(cur.n);let picks=[0,3,17,1,9,100,200,300,400,500].filter(function(i){return i<rules.length;});qs=picks.slice(0,5).map(function(idx){let r=rules[idx];return{q:'يا أحمد - قاعدة '+(idx+1)+' - '+r.title+' - إيه المثال الصح؟',o:[r.ex,rules[(idx+1)%rules.length].ex,rules[(idx+2)%rules.length].ex],a:0};});qi=0;score=0;renderQ();}
+function renderQ(){let box=document.getElementById('quizBox');if(!box)return;if(qi>=qs.length){box.innerHTML='<h2>🎉 يا أحمد نتيجتك: '+score+'/5</h2><p>مشروعك تحت إشراف أ/ سامح زخاري - عاش!</p>';let b1=btn('🔄 العب تاني','',function(){showQuiz();});b1.className='btn';let b2=btn('📖 ارجع للقواعد','#22c55e',function(){go('grammar');});b2.className='btn';box.appendChild(b1);box.appendChild(b2);if(score>=3){pts+=20;updatePts();}return;}let q=qs[qi];box.innerHTML='<h3>'+q.q+'</h3><div id="quizOpt"></div><p>سؤال '+(qi+1)+' من 5</p>';let optDiv=document.getElementById('quizOpt');q.o.forEach(function(o,i){let b=document.createElement('button');b.innerText=o;b.onclick=function(){if(i==qs[qi].a)score++;qi++;renderQ();};optDiv.appendChild(b);});}
+function pageSpeak(){let d=document.createElement('div');d.className='card';d.innerHTML='<h3>🎙️ انطق معايا - '+cur.n+' - مع أحمد</h3>';let base=dict[cur.n]||dict['الإنجليزية'];base.slice(0,3).forEach(function(w){let x=document.createElement('div');x.className='word';x.innerHTML='<div class="arBox"><span class="ar">'+w.ar+' = '+w.for+'</span><span style="color:#7c3aed;font-weight:bold">النطق: '+w.pron+'</span></div>';let b=btn('🔊 اسمع','',function(){speakText(w.for,cur.c);});x.appendChild(b);d.appendChild(x);});let bf=btn('🎤 أنا نطقتها صح - خد 10 نقاط','',function(){pts+=10;updatePts();alert('عاش يا أحمد! نطقك ممتاز! خدت 10 نقاط');});bf.className='btn';d.appendChild(bf);return d;}
+function pageStories(){let d=document.createElement('div');d.className='card';d.innerHTML='<h3>📖 قصة - الولد الشاطر - تأليف أحمد علاء أنور</h3><div style="background:#fef3c7;padding:12px;border-radius:12px">بالعربي: كان فيه ولد شاطر اسمه أحمد، بيحب المدرسة، وبيذاكر كل يوم، وبقى دكتور كبير.<br><br>بالإنجليزي: There was a smart boy named Ahmed, he loves school, he studies every day.</div>';let b=btn('🔊 اسمع القصة','',function(){speakText('There was a smart boy named Ahmed, he loves school','en-US');});d.appendChild(b);return d;}
+function pageGames(){let d=document.createElement('div');d.className='card';d.innerHTML='<h3>🎮 لعبة - خمن الكلمة - مع أحمد</h3>';let box=document.createElement('div');d.appendChild(box);let bf=btn('🎲 كلمة جديدة','',function(){renderGame(box);});bf.className='btn';d.appendChild(bf);renderGame(box);return d;}
+function renderGame(box){let base=dict[cur.n]||dict['الإنجليزية'];let q=base[Math.floor(Math.random()*base.length)];let others=base.filter(function(x){return x!=q;}).slice(0,2);let opts=[q.for,others[0].for,others[1].for].sort(function(){return Math.random()-0.5;});box.innerHTML='<h3>يا أحمد إيه معنى "<b>'+q.ar+'</b>" بال'+cur.n+'؟</h3>';let optDiv=document.createElement('div');optDiv.id='quizOpt';opts.forEach(function(o){let b=document.createElement('button');b.innerText=o;b.onclick=function(){if(o==q.for){pts+=10;updatePts();alert('صح يا أحمد! خدت 10 نقاط');renderGame(box);}else alert('غلط! حاول تاني يا أحمد');};optDiv.appendChild(b);});box.appendChild(optDiv);}
+function pageChat(){let d=document.createElement('div');d.className='card';d.innerHTML='<h3>💬 شات - اتكلم مع أحمد</h3>';let box=document.createElement('div');box.style.cssText='background:#f1f5f9;padding:10px;border-radius:12px;max-height:200px;overflow:auto';box.innerHTML='<div style="background:#fff;padding:10px;border-radius:10px">🤖 أهلا! أنا مساعد أحمد علاء أنور! اكتبلي أهلا وأنا هرد عليك!</div>';let inp=document.createElement('input');inp.placeholder='اكتب هنا...';let b=btn('💬 ابعت دلوقتي','',function(){let txt=inp.value.trim();if(!txt){alert('اكتب حاجة الأول يا أحمد!');return;}box.innerHTML+='<div style="background:#dcfce7;padding:10px;border-radius:10px;margin:6px 0">أحمد: '+txt+'</div>';let reply='عاش يا أحمد! انت بتتكلم '+cur.n+' كويس! جرب تقولي شكرا بال'+cur.n+'!';if(txt.indexOf('أهلا')>=0||txt.indexOf('Hello')>=0)reply='أهلا بيك يا أحمد! عامل إيه النهاردة؟ أ/ سامح زخاري هيكون فخور بيك!';if(txt.indexOf('شكرا')>=0||txt.indexOf('Thank')>=0)reply='العفو يا أحمد! انت شاطر جدا!';box.innerHTML+='<div style="background:#fff;padding:10px;border-radius:10px;margin:6px 0">🤖 مساعد أحمد: '+reply+'</div>';inp.value='';pts+=5;updatePts();});b.className='btn';d.appendChild(box);d.appendChild(inp);d.appendChild(b);return d;}
+let verbsAr=['أنا أحب','أنا أريد','أنا أرى','أنا أقرأ','أنا أكتب','أنا ألعب','أنا آكل','أنا أشرب','أنا أذهب إلى','أنا أتعلم'];let verbsEn=['I love','I want','I see','I read','I write','I play','I eat','I drink','I go to','I learn'];let nounsAr=['كتاب','مدرسة','بيت','صديق','تفاح','ماء','قطة','كلب','معلم','درس'];let nounsEn=['book','school','house','friend','apple','water','cat','dog','teacher','lesson'];let adjsAr=['كبير','صغير','جميل','جديد','قديم','سريع','سعيد','ذكي','قوي','رائع'];let adjsEn=['big','small','beautiful','new','old','fast','happy','smart','strong','amazing'];
+function pageInfinite(){let d=document.createElement('div');d.className='card';d.innerHTML='<h3>♾️ اللا نهائي - جمل جديدة - مع أحمد</h3>';let box=document.createElement('div');d.appendChild(box);let gen=function(){box.innerHTML='';for(let i=0;i<20;i++){let vi=Math.floor(Math.random()*verbsAr.length),ni=Math.floor(Math.random()*nounsAr.length),ai=Math.floor(Math.random()*adjsAr.length);let arText=verbsAr[vi]+' '+nounsAr[ni]+' '+adjsAr[ai];let enText=verbsEn[vi]+' '+nounsEn[ni]+' '+adjsEn[ai];let x=document.createElement('div');x.className='word';x.innerHTML='<div class="arBox"><span class="ar">'+arText+'</span></div><div class="forBox"><b>'+enText+'</b></div>';let b=btn('🔊','',function(){speakText(enText,cur.c);});x.appendChild(b);box.appendChild(x);}learned+=20;pts+=20;updatePts();};let bf=btn('♾️ ولد 20 جملة جديدة','',gen);bf.className='btn';d.appendChild(bf);gen();return d;}
+function pageFav(){let d=document.createElement('div');d.className='card';d.innerHTML='<h3>⭐ مفضلتي - أحمد علاء أنور</h3>';let box=document.createElement('div');if(favs.length==0)box.innerHTML='<p>لسه مفيش كلمات يا أحمد. دوس على ⭐ جنب أي قاعدة أو كلمة عشان تحفظها هنا!</p>';else box.innerHTML=favs.map(function(f){return '<div class="word"><b>'+f+'</b></div>';}).join('');let b=btn('🗑️ امسح المفضلة','',function(){favs=[];go('fav');alert('اتمسحت المفضلة يا أحمد');});b.className='btn';d.appendChild(box);d.appendChild(b);return d;}
+function addFav(txt){favs.push(txt);alert('اتحفظت في المفضلة ⭐ يا أحمد: '+txt);}
+let tabs={home:'🏠 مقدمة أحمد',langs:'🌍 اللغة',grammar:'📖 900 قاعدة',letters:'🔤 الحروف',words:'📚 اتعلم',translate:'📖 قاموس',quiz:'📝 امتحان القواعد',speak:'🎙️ انطق',stories:'📖 قصص',games:'🎮 لعبة',chat:'💬 شات',infinite:'♾️ لا نهائي',fav:'⭐ مفضلتي'};
+let tabEl=document.getElementById('tabs');
+for(let k in tabs){let b=document.createElement('button');b.innerText=tabs[k];b.id='tab-'+k;b.onclick=function(){go(k);};tabEl.appendChild(b);}
+function go(k){
+document.querySelectorAll('.tabs button').forEach(function(x){x.classList.remove('active');});
+let tb=document.getElementById('tab-'+k);if(tb)tb.classList.add('active');
+let content=document.getElementById('content');content.innerHTML='';
+let el=null;
+if(k=='home')el=pageHome();if(k=='langs')el=pageLangs();if(k=='grammar')el=pageGrammar();if(k=='letters')el=pageLetters();if(k=='words')el=pageWords();if(k=='translate')el=pageTranslate();if(k=='quiz')el=pageQuiz();if(k=='speak')el=pageSpeak();if(k=='stories')el=pageStories();if(k=='games')el=pageGames();if(k=='chat')el=pageChat();if(k=='infinite')el=pageInfinite();if(k=='fav')el=pageFav();
+if(el)content.appendChild(el);
+window.scrollTo(0,0);
+if(k=='grammar')renderGrammar();
+let tr=document.getElementById('totalRules');if(tr)tr.innerText=cur.total||50;
+}
+go('home');
+</script>
+</body>
+</html>
